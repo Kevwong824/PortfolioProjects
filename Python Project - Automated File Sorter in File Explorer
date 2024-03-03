@@ -1,1 +1,33 @@
+#importing module: os, shutil
+import os, shutil
 
+#Creating folder path and file_name variable
+path = r"C:/Users/Kevin/Desktop/File Sorter Project Folder/"
+
+file_name = os.listdir(path)
+
+#Creating a list for the new folders
+folder_names = ['excel files', 'image files', 'text files', 'doc files', 'pdf files']
+
+#Have a for loop to check if folder already exist within our folder path. If not, create the new folder from list.
+for loop in range(0,5):
+    if not os.path.exists(path + folder_names[loop]):
+        #print(path + folder_names[loop]) - this was to check if the folder was created properly
+        os.makedirs(path + folder_names[loop])
+
+#Have a for loop to check each file type and move them into the new folders created from the list
+for file in file_name:
+    if ".xlsx" in file and not os.path.exists(path + 'excel files/' + file):
+        shutil.move(path + file, path + 'excel files/' + file)
+    elif ".jpg" in file and not os.path.exists(path + 'image files/' + file):
+        shutil.move(path + file, path + 'image files/' + file)
+    elif ".txt" in file and not os.path.exists(path + 'text files/' + file):
+        shutil.move(path + file, path + 'text files/' + file)
+    elif ".pdf" in file and not os.path.exists(path + 'pdf files/' + file):
+        shutil.move(path + file, path + 'pdf files/' + file)
+    elif ".docx" in file and not os.path.exists(path + 'doc files/' + file):
+        shutil.move(path + file, path + 'doc files/' + file)
+    else:
+        print('There are still some files that were not moved.')
+
+print('All files were transfered.')
